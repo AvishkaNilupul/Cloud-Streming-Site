@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link href="../static/css/style.css" rel="stylesheet">
+        <title th:text="${episode}">Title</title>
+    
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">RexFlix</a>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+<div class="mt-5 row col-12 container-fluid">
+    <!-- Left Column for Video Player -->
+        <div class=" col col-9">
+            <video th:src="@{${video}}" width="1280px" height="720px" controls preload="none"></video>
+            <h1 th:text="${title}" class="">Moive Name</h1>
+            <h2 th:text="${episode}">Episode Name</h2>
+        </div>
+
+    
+    <!-- Right Column for Cards -->
+    <div class=" col col-3">
+        <h1>Up Next</h1>
+        <div th:each="movie, movieIndex : ${movies}" class="card mb-3" style="max-width: 500px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img th:src="${movie.image}" class="img-fluid" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${movie.name}" >Card title</h5>
+                  <p class="card-text" th:text="${movie.episode}" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <button id="submitbtn" class="btn btn-primary mt-3">Play</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <script>
+
+      document.querySelectorAll('[id^="submitbtn"]').forEach(item => {
+          item.addEventListener('click', event => {
+              var title = item.parentNode.querySelector('.card-title').innerText;
+              var episode = item.parentNode.querySelector('.card-text').innerText;
+              window.location.href = "/watch?title=" + encodeURIComponent(title)+ "&episode=" + encodeURIComponent(episode);
+          });
+      });
+  
+  </script>
+
+
+</body>
+
+
+</html>

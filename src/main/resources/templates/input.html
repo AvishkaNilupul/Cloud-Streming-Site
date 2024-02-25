@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Index</title>
+</head>
+<body>
+<h1> Springboot wtih Thymeleaf User Form - user input</h1>
+
+<form th:action="register" th:method="post" th:object="${userForm}">
+	<label for="firstName">First Name</label>
+	<input type="text" th:field="*{firstName}">
+
+	<label for="lastName">Last Name</label>
+	<input type="text" th:field="*{lastName}">
+
+	<label for="email">Email</label>
+	<input type="email" th:field="*{email}">
+
+	<label for="password">Password</label>
+	<input type="password" th:field="*{passwd}">
+
+	<label for="dob">Birth Date</label>
+	<input type="date" th:field="*{dob}">
+
+	<button type="submit">Submit</button>
+</form>
+
+<br/>
+<h1 th:text="${message}">message</h1>
+
+
+</body>
+</html>
