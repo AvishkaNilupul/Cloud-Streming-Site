@@ -1,4 +1,4 @@
-package io.cloudvideoplayer.cloudvideoplayer;
+package io.cloudvideoplayer.cloudvideoplayer.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,7 +10,8 @@ import reactor.core.publisher.Mono;
 @Service
 public class VideoService {
 
-    private static final String FORMAT="classpath:videos/%s.mp4";
+    private static final String FORMAT="classpath:Videos/%s.mp4";
+
 
     @Qualifier("webApplicationContext")
     @Autowired

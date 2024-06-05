@@ -1,17 +1,19 @@
-package io.cloudvideoplayer.cloudvideoplayer;
+package io.cloudvideoplayer.cloudvideoplayer.Services;
+
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-
+@Service
 public class VideoDownloader {
-    public void VideoDownload() throws IOException {
+    public void VideoDownload(String link) throws IOException {
 
-        String destPath = "Videos"+ File.separator+ "test.mp4" ;
+        String destPath = "target/classes/Videos"+ File.separator+ "test.mp4" ;
         String directoryPath = destPath.substring(0, destPath.lastIndexOf(File.separator));
-        File directory = new File(directoryPath);
+        File directory = new File("Videos");
         if (!directory.exists()) {
             if (directory.mkdirs()) {
                 System.out.println("Directory created: " + directoryPath);
@@ -20,7 +22,7 @@ public class VideoDownloader {
             }
         }
 
-        URL url = new URL("");
+        URL url = new URL(link);
         try (InputStream inputStream = url.openStream();
              FileOutputStream fileOutputStream = new FileOutputStream(destPath)) {
 

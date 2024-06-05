@@ -1,9 +1,12 @@
 package io.cloudvideoplayer.cloudvideoplayer.Model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "frontmovies")
 public class FrontPageMovies {
     @Id
+    private String ID;
     private String name;
     private String location;
     private String image;

@@ -25,28 +25,11 @@
         <div class=" col col-9">
             <video th:src="@{${video}}" width="1280px" height="720px" controls preload="none"></video>
             <h1 th:text="${title}" class="">Moive Name</h1>
-            <h2 th:text="${episode}">Episode Name</h2>
         </div>
 
     
     <!-- Right Column for Cards -->
-    <div class=" col col-3">
-        <h1>Up Next</h1>
-        <div th:each="movie, movieIndex : ${movies}" class="card mb-3" style="max-width: 500px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img th:src="${movie.image}" class="img-fluid" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title" th:text="${movie.name}" >Card title</h5>
-                  <p class="card-text" th:text="${movie.episode}" >This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <button id="submitbtn" class="btn btn-primary mt-3">Play</button>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
+
     <script>
 
       document.querySelectorAll('[id^="submitbtn"]').forEach(item => {

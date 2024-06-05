@@ -1,6 +1,6 @@
 package io.cloudvideoplayer.cloudvideoplayer.Model;
 
-public class VideoModel {
+public class Video {
 
 	private String firstName;
 

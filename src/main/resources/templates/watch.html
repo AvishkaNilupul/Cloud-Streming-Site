@@ -2,9 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Player</title>
+  <style>
+    body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#videoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.video-title {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease;
+}
+
+
+#videoPlayer:hover + .controls .video-title {
+  opacity: 1; /* Show on hover */
+}
+
+#nextButton {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+  </style>
 </head>
 <body>
-$END$
+  <div class="video-container">
+    <video id="videoPlayer" controls autoplay>
+      <source th:src="@{${video}}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="controls">
+        <div class="video-title">
+            <div th:text="${title}" class=".card-title" >Hello world</div>
+            <div th:text="${episode}" class=".card-text" >Episode 2</div>
+        </div>
+
+      <button id="nextButton">Next</button>
+    </div>
+  </div>
+  <script>
+    const nextButton = document.getElementById('nextButton');
+
+    function extractParametersFromURL() {
+            var url = window.location.href;
+
+            var urlObject = new URL(url);
+
+            var searchParams = new URLSearchParams(urlObject.search);
+
+            var title = searchParams.get('title');
+            var episodeString = searchParams.get('episode');
+
+
+            var episode = parseInt(episodeString.substr(episodeString.lastIndexOf(' ') + 1));
+
+            var nextEpisodeNumber = episode + 1;
+            var nextt = String(nextEpisodeNumber).padStart(2, '0'); 
+
+            var episode ='episode '+nextt;
+
+            window.location.href = "/watch?title=" + encodeURIComponent(title) + "&episode=" + encodeURIComponent(episode);
+
+
+        }
+
+
+        nextButton.addEventListener('click',function() {
+            extractParametersFromURL();
+        });
+        videoPlayer.addEventListener('ended', function() {
+            extractParametersFromURL();
+        });
+
+
+</script>
+
 </body>
 </html>
