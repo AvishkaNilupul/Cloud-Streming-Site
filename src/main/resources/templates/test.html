@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Dailymotion Video</title>
+</head>
+<body>
+    <h1>My Embedded Dailymotion Video</h1>
+    
+    <iframe id="player" width="560" height="315" src="https://www.dailymotion.com/embed/video/k3yBPuBtRKkPrEAdDeG" frameborder="0" allowfullscreen></iframe>
+
+    <script>
+        // Listen for the Dailymotion player's "play" event
+        var player = document.getElementById("player");
+        player.addEventListener("play", function() {
+            // When the video starts playing, add an event listener for the "ended" event
+            player.contentWindow.addEventListener("message", function(event) {
+                // If the event indicates that the video has ended
+                if (event.data.event === "video_end") {
+                    // Redirect to the home page
+                    console.log("end"); // Replace "home.html" with your actual home page URL
+                }
+            });
+        });
+    </script>
+</body>
+</html>
